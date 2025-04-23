@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=arloader.html" />
-    <script>window.location.href = "arloader.html"</script>
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    If you are not redirected, <a href="arloader.html">click here</a>.
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AR Loader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="margin:0; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh;">
+  <noscript>Please enable JavaScript to view this AR experience.</noscript>
+  <div id="message">Launching AR experience...</div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const glbUrl = location.origin + "/nft.glb";
+      const usdzUrl = location.origin + "/nft.usdz";
+
+      setTimeout(() => {
+        if (isIOS) {
+          location.href = usdzUrl;
+        } else {
+          location.href =
+            "https://arvr.google.com/scene-viewer/1.0?file=" +
+            encodeURIComponent(glbUrl) +
+            "&mode=ar_only";
+        }
+      }, 500); // 500ms is enough once you're in index.html
+    });
+  </script>
+</body>
 </html>
