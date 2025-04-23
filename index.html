@@ -4,10 +4,26 @@
   <meta charset="UTF-8" />
   <title>AR Loader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="5;url=nft.usdz" id="fallback-meta">
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
 </head>
-<body style="margin:0; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh;">
-  <noscript>Please enable JavaScript to view this AR experience.</noscript>
-  <div id="message">Launching AR experience...</div>
+<body>
+  <div>
+    <h1>Loading AR Experience...</h1>
+    <p>If this takes too long, <a id="manualLink" href="nft.usdz">click here</a>.</p>
+  </div>
 
   <script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -15,16 +31,19 @@
       const glbUrl = location.origin + "/nft.glb";
       const usdzUrl = location.origin + "/nft.usdz";
 
+      // Remove fallback if JS works
+      const meta = document.getElementById("fallback-meta");
+      if (meta) meta.remove();
+
       setTimeout(() => {
         if (isIOS) {
           location.href = usdzUrl;
         } else {
-          location.href =
-            "https://arvr.google.com/scene-viewer/1.0?file=" +
+          location.href = "https://arvr.google.com/scene-viewer/1.0?file=" +
             encodeURIComponent(glbUrl) +
             "&mode=ar_only";
         }
-      }, 500); // 500ms is enough once you're in index.html
+      }, 1200);
     });
   </script>
 </body>
